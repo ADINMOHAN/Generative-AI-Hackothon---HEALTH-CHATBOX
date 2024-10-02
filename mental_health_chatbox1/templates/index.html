@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='scroll.js') }}"></script>
+    
+</head>
+<body>
+    <div class="nav-bar">
+    
+    <h1>ADIRAH - BOT COMPANION</h1>
+    </div>
+    <div class="chat-container">
+    <div class="conversation-box">
+        {% if conversation %}
+            {% for msg in conversation %}
+                {% if msg.role == 'user' %}
+                    <p class="user-message"><strong>You:</strong> {{ msg.content }}</p>
+                {% elif msg.role == 'model' %}
+                    <p class="ai-message"><strong>AI:</strong> {{ msg.content }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+<div class="form-container">
+    <form method="POST">
+        <label for="user_input">Your Message:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Send</button>
+    </form>
+</div>
+</div>
+
+
+    {% if response %}
+        <p><strong>AI:</strong> {{ response }}</p>
+    {% endif %}  
+</body>
+</html>
